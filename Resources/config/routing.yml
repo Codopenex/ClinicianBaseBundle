@@ -1,0 +1,23 @@
+CodopenexClinicianBaseBundle_dashboard:
+    pattern:  /clinician-base/dashboard
+    defaults: { _controller: CodopenexClinicianBaseBundle:Page:dashboard }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_clinicians:
+    pattern:  /clinician-base/clinicians
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:clinicians }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_clinician_new:
+    pattern:  /clinician-base/new-clinician
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:new }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_clinician_create:
+    pattern:  /clinician-base/create-clinician
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:create }
+    requirements:
+        _method:  POST

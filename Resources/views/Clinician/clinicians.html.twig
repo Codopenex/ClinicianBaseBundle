@@ -1,0 +1,25 @@
+{# src/Codopenex/ClinicianBaseBundle/Resouces/views/clinicians.html.twig #}
+{% extends 'XperedonBlogBundle::layout.html.twig' %}
+
+{% block title %}Clinicians{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/codopenexclinicianbase/css/clinician.css') }}" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ asset('vendor/bundles/WhiteOctober/PagerfantaBundle/Resources/public/css/pagerfantaDefault.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<div class="pagerfanta">{{ pagerfanta(clinicians, 'default') }}</div>
+
+<div class="table-surround">
+	<table class="clinicians" cellpadding="10" cellspacing="10">
+	<tr>
+		<th>Name</th><th>Phone</th><th>Email</th>
+	</tr>
+	{% for clinician in clinicians %}
+    	<tr><td>{{ clinician.name }}</td><td>{{ clinician.phone }}</td><td>{{ clinician.email }}</td></tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

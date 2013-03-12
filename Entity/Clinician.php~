@@ -1,0 +1,40 @@
+<?php
+// src/Codopenex/ClinicianBaseBundle/Entity/Clinician.php
+
+namespace Codopenex\ClinicianBaseBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity(repositoryClass="Codopenex\ClinicianBaseBundle\Repository\ClinicianBaseRepository")
+ * @ORM\Table(name="clinicians")
+ */
+class Clinician
+{
+    public function __construct()
+    {
+		// Stuff
+		//$this->comments = new ArrayCollection();
+		
+        //$this->setCreated(new \DateTime());
+        //$this->setUpdated(new \DateTime());
+    }
+	
+	public function __toString()
+	{
+		return $this->getName();
+	}
+	
+	/**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+	
+	/**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+}
