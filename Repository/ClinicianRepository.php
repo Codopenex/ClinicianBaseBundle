@@ -21,6 +21,5 @@ class ClinicianRepository extends EntityRepository
 						 ->getResult();
 	
 		return $clinicians;
-	}
-	
+	}	
 }

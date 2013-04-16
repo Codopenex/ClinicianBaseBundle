@@ -1,9 +1,60 @@
 /* CSS Document */
 .clinicians
 {
-	padding:10px;
-	border: 1px solid #333;
-	background-color:#CC3;
-	border-radius: 3px;	
+	color:#FFF;	
 }
 
+table#clinicians {
+    border-collapse: collapse;   
+}
+#clinicians tr {
+    background-color: #eee;
+    border-top: 1px solid #fff;
+}
+#clinicians tr:hover {
+    background-color: #ccc;
+}
+#clinicians th {
+    background-color: #fff;
+}
+#clinicians th, #clinicians td {
+    padding: 3px 5px;
+}
+#clinicians td:hover {
+    cursor: pointer;
+}
+
+.clinician-form select textarea
+{
+	float:left;
+	margin-bottom:20px;
+}
+
+.table-surround
+{
+	padding:10px;
+	border: 1px solid #C60;
+	border-radius: 5px;
+	moz-border-radius: 5px;
+	background-color:#FFC;	
+}
+
+.clinicians th
+{
+	/* 
+	padding:5px; */
+	text-align:left; 
+	color:#333;	
+}
+
+.clinicians td
+{
+	/* 
+	padding:5px;
+	background-color: #030;
+	border: solid #FFF; */
+}
+
+#specialties-search{
+	float:right;
+}

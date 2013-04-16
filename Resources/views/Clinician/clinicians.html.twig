@@ -1,7 +1,22 @@
-{# src/Codopenex/ClinicianBaseBundle/Resouces/views/clinicians.html.twig #}
+{# src/Codopenex/ClinicianBaseBundle/Resouces/views/Clinician/clinicians.html.twig #}
 {% extends 'XperedonBlogBundle::layout.html.twig' %}
 
 {% block title %}Clinicians{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+
+    $('#clinicians tr').click(function() {
+        var href = $(this).find("a").attr("href");
+        if(href) {
+            window.location = href;
+        }
+    });
+
+});
+</script>
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -13,12 +28,12 @@
 <div class="pagerfanta">{{ pagerfanta(clinicians, 'default') }}</div>
 
 <div class="table-surround">
-	<table class="clinicians" cellpadding="10" cellspacing="10">
+	<table id="clinicians" class="clinicians" cellpadding="10" cellspacing="10">
 	<tr>
 		<th>Name</th><th>Phone</th><th>Email</th>
 	</tr>
 	{% for clinician in clinicians %}
-    	<tr><td>{{ clinician.name }}</td><td>{{ clinician.phone }}</td><td>{{ clinician.email }}</td></tr>
+    	<tr><td><a href="{{ path('CodopenexClinicianBaseBundle_clinician_edit', {'id': clinician.id}) }}">{{ clinician.name }}</a></td><td><a href="{{ path('CodopenexClinicianBaseBundle_clinician_edit', {'id': clinician.id}) }}">{{ clinician.phone }}</a></td><td><a href="{{ path('CodopenexClinicianBaseBundle_clinician_edit', {'id': clinician.id}) }}">{{ clinician.email }}</a></td></tr>
     {% endfor %}
     </table>
 </div>

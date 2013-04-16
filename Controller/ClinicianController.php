@@ -6,11 +6,12 @@ namespace Codopenex\ClinicianBaseBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Codopenex\ClinicianBaseBundle\Entity\Clinician;
 use Codopenex\ClinicianBaseBundle\Form\ClinicianType;
+use Codopenex\ClinicianBaseBundle\Form\SearchType;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 
 /**
- * ClinicianBase controller.
+ * Clinician controller 
  */
 class ClinicianController extends Controller
 {
@@ -30,7 +31,7 @@ class ClinicianController extends Controller
 	}
 	
 	/**
-     * Show a ClinicianBase entry
+     * Show a Clinician entry
      */
 	public function createAction()
     {
@@ -49,28 +50,83 @@ class ClinicianController extends Controller
             return $this->redirect($this->generateUrl('CodopenexClinicianBaseBundle_clinicians', array()));
         }
 
-        return $this->render('CodopenexClinicianBaseBundle:Clinicians:create.html.twig', array(
+        return $this->render('CodopenexClinicianBaseBundle:Clinician:create.html.twig', array(
             'clinician' => $clinician,
             'form'    => $form->createView()
         ));
 	}
 	
     /**
-     * Show a ClinicianBase entry
+     * Show/edit a Clinician entry
      */
-    public function showAction($id)
+    public function editAction($id)
     {
+		$request = $this->getRequest();
+		
+		if (is_null($id)) {
+			$postData = $request->get('clinician');
+			$id = $postData['id'];
+    	}
+		
         $em = $this->getDoctrine()->getEntityManager();
 
         $clinician = $em->getRepository('CodopenexClinicianBaseBundle:Clinician')->find($id);
+		$form    = $this->createForm(new ClinicianType(), $clinician);
+		
+        if ($request->getMethod() == 'POST') {
+        $form->bindRequest($request);
 
-        if (!$clinician) {
-            throw $this->createNotFoundException('Unable to find Clinician.');
-        }
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()
+                ->getEntityManager();
+				$em->persist($clinician);
+				$em->flush();
+	
+				return $this->redirect($this->generateUrl('CodopenexClinicianBaseBundle:Clinician'));
+			}
+		}
+	
+		return $this->render('CodopenexClinicianBaseBundle:Clinician:edit.html.twig', array(
+			'clinician' => $clinician,
+			'form' => $form->createView()
+		));
 
-        return $this->render('CodopenexClinicianBaseBundle:Clinician:show.html.twig', array(
-            'clinician'      => $clinician
-        ));
+    }
+	
+	/**
+     * Show/update a Clinician entry
+     */
+    public function updateAction($id)
+    {
+		$request = $this->getRequest();
+		
+		if (is_null($id)) {
+			$postData = $request->get('clinician');
+			$id = $postData['id'];
+    	}
+		
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $clinician = $em->getRepository('CodopenexClinicianBaseBundle:Clinician')->find($id);
+		$form    = $this->createForm(new ClinicianType(), $clinician);
+				
+        if ($request->getMethod() == 'POST') {
+        	$form->bindRequest($request);
+
+			if ($form->isValid()) {
+				$em = $this->getDoctrine()
+                ->getEntityManager();
+				$em->merge($clinician);
+				$em->flush();
+	
+				return $this->redirect($this->generateUrl('CodopenexClinicianBaseBundle_clinician_edit', array('id' => $id)));
+			}
+		}
+		
+		return $this->render('CodopenexClinicianBaseBundle:Clinician:edit.html.twig', array(
+			'form' => $form->createView()
+		));
+
     }
 	
 	/**
@@ -124,4 +180,58 @@ class ClinicianController extends Controller
 		// return pagerfanta to cliniciansAction
 		return $pagerfanta;		
 	}
+	
+	/**
+     * Search for Clinicians
+     */
+    public function searchAction()
+    {
+		if($this->getRequest())
+		{
+			$request = $this->getRequest();
+		}
+		$em = $this->getDoctrine()->getEntityManager();
+
+		$form = $this->createForm(new SearchType($em));
+		
+		$clinician_results = array();
+		
+		if ($request->getMethod() == 'POST') {
+			
+        	$form->bindRequest($request);
+
+			if ($form->isValid()) {
+				
+				$data = $form->getData();
+				
+				foreach($data as $k => $v)
+				{
+					if($k == 'specialties')
+					{
+						$this->search_specialty_id = $v->getId();
+					}
+				}
+				
+				$query = $em->createQuery('SELECT c, s										   
+										   FROM CodopenexClinicianBaseBundle:Clinician c 
+										   JOIN c.specialties s
+										   WHERE s.id = ' . $this->search_specialty_id); 
+
+				try
+				{
+					$clinician_results = $query->getResult();
+				} catch (\Doctrine\Orm\NoResultException $e) {
+					//Handle No Result Exception here
+					echo 'No Results Found Exception - ' . $e;
+				}
+				
+				//return $this->redirect($this->generateUrl('CodopenexClinicianBaseBundle_clinician_edit', array('id' => $id)));
+			}
+		}
+		
+        return $this->render('CodopenexClinicianBaseBundle:Clinician:search.html.twig', array(
+            'form' => $form->createView(),
+			'clinician_results' => $clinician_results,
+        ));
+    }
 }

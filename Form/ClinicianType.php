@@ -11,9 +11,12 @@ class ClinicianType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+			//->add('id')
             ->add('name')
             ->add('phone')
 			->add('email', 'email')
+			->add('medical_facilities')
+			->add('specialties')
         ;
     }
 
@@ -28,4 +31,5 @@ class ClinicianType extends AbstractType
     {
         return 'codopenex_clinicianbasebundle_cliniciantype';
     }
+
 }

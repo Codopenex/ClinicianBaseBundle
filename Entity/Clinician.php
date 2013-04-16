@@ -42,6 +42,67 @@ class Clinician
 	}
 	
 	/**
+     * @ORM\ManyToMany(targetEntity="Codopenex\ClinicianBaseBundle\Entity\Specialty", inversedBy="Clinician")
+     * @ORM\JoinTable(name="clinicians_specialties",
+	 *   joinColumns={
+ 	 *     @ORM\JoinColumn(name="clinician_id", referencedColumnName="id")
+	 *   },
+	 *   inverseJoinColumns={
+	 *     @ORM\JoinColumn(name="specialty_id", referencedColumnName="id")
+	 *   }
+	 * )
+     **/
+    private $specialties;
+	
+	/**
+     * Specialties
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSpecialties()
+    {
+        return $this->specialties;
+    }
+	
+	/**
+     * Specialties
+     *
+	 * @param collection $specialties
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function setSpecialties($specialties)
+    {
+        $this->specialties = $specialties;
+    }
+	
+    /**
+     * @ORM\ManyToMany(targetEntity="Codopenex\ClinicianBaseBundle\Entity\MedicalFacility", inversedBy="Clinician")
+     * @ORM\JoinTable(name="clinicians_medicalfacilities")
+     **/
+    private $medical_facilities;
+	
+	/**
+     * Medical Facilities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedicalFacilities()
+    {
+        return $this->medical_facilities;
+    }
+	
+	/**
+     * Medical Facilities
+     *
+	 * @param collection $medical_facilities
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function setMedicalFacilities($medical_facilities)
+    {
+        $this->medical_facilities = $medical_facilities;
+    }
+	
+	/**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -56,6 +117,19 @@ class Clinician
     public function getId()
     {
         return $this->id;
+    }
+	
+	/**
+     * Set id
+     *
+     * @param string $id
+     * @return string
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    
+        return $this;
     }
 	
 	/**
@@ -140,5 +214,51 @@ class Clinician
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Add specialties
+     *
+     * @param \Codopenex\ClinicianBaseBundle\Entity\Specialty $specialties
+     * @return Clinician
+     */
+    public function addSpecialtie(\Codopenex\ClinicianBaseBundle\Entity\Specialty $specialties)
+    {
+        $this->specialties[] = $specialties;
+    
+        return $this;
+    }
+
+    /**
+     * Remove specialties
+     *
+     * @param \Codopenex\ClinicianBaseBundle\Entity\Specialty $specialties
+     */
+    public function removeSpecialtie(\Codopenex\ClinicianBaseBundle\Entity\Specialty $specialties)
+    {
+        $this->specialties->removeElement($specialties);
+    }
+
+    /**
+     * Add medical_facilities
+     *
+     * @param \Codopenex\ClinicianBaseBundle\Entity\MedicalFacility $medicalFacilities
+     * @return Clinician
+     */
+    public function addMedicalFacilitie(\Codopenex\ClinicianBaseBundle\Entity\MedicalFacility $medicalFacilities)
+    {
+        $this->medical_facilities[] = $medicalFacilities;
+    
+        return $this;
+    }
+
+    /**
+     * Remove medical_facilities
+     *
+     * @param \Codopenex\ClinicianBaseBundle\Entity\MedicalFacility $medicalFacilities
+     */
+    public function removeMedicalFacilitie(\Codopenex\ClinicianBaseBundle\Entity\MedicalFacility $medicalFacilities)
+    {
+        $this->medical_facilities->removeElement($medicalFacilities);
     }
 }

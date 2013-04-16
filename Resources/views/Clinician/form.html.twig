@@ -9,10 +9,14 @@
 {% endblock %}
 
 {% block body %}
-<form action="{{ path('CodopenexClinicianBaseBundle_clinician_create' ) }}" method="post" {{ form_enctype(form) }} class="clinician">
-    {{ form_widget(form) }}
+<form action="{{ path('CodopenexClinicianBaseBundle_clinician_create' ) }}" method="post" {{ form_enctype(form) }} class="clinician-form">
+	{{ form_row(form.name, { 'label': 'Name' }) }}
+	{{ form_row(form.phone, { 'label': 'Phone' }) }}
+	{{ form_row(form.email, { 'label': 'Email' }) }}
+	{{ form_row(form.medical_facilities, { 'label': 'Medical Facilities' }) }}
+    {{ form_rest(form) }}
     <p>
-        <input type="submit" value="Submit">
+        <label></label><input type="submit" value="Submit" class="clinician-submit">
     </p>
 </form>
 {% endblock %}

@@ -5,6 +5,11 @@
 
 {% block body %}
 	ClinicianBase Dashboard<br />
+	<a href="{{ path('CodopenexClinicianBaseBundle_clinicians_search') }}" title="Clinicians" target="_self">Search Clinicians</a><br />
 	<a href="{{ path('CodopenexClinicianBaseBundle_clinicians') }}" title="Clinicians" target="_self">Clinicians</a><br />
 	<a href="{{ path('CodopenexClinicianBaseBundle_clinician_new') }}" title="New Clinician" target="_self">New Clinician</a><br />
+	<a href="{{ path('CodopenexClinicianBaseBundle_medical_facilities') }}" title="Medical Facilities" target="_self">Medical Facilities</a><br />
+	<a href="{{ path('CodopenexClinicianBaseBundle_medical_facility_new') }}" title="New Medical Facility" target="_self">New Medical Facility</a><br />
+	<a href="{{ path('CodopenexClinicianBaseBundle_specialties') }}" title="Specialties" target="_self">Specialties</a><br />
+	<a href="{{ path('CodopenexClinicianBaseBundle_specialty_new') }}" title="New Specialty" target="_self">New Specialty</a><br />
 {% endblock %}

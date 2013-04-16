@@ -4,6 +4,12 @@ CodopenexClinicianBaseBundle_dashboard:
     requirements:
         _method:  GET
 
+CodopenexClinicianBaseBundle_clinicians_search:
+    pattern:  /clinician-base/search-clinicians
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:search }
+    requirements:
+        _method:  GET|POST
+
 CodopenexClinicianBaseBundle_clinicians:
     pattern:  /clinician-base/clinicians
     defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:clinicians }
@@ -19,5 +25,53 @@ CodopenexClinicianBaseBundle_clinician_new:
 CodopenexClinicianBaseBundle_clinician_create:
     pattern:  /clinician-base/create-clinician
     defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:create }
+    requirements:
+        _method:  POST
+
+CodopenexClinicianBaseBundle_clinician_edit:
+    pattern:  /clinician-base/edit-clinician/{id}
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:edit }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_clinician_update:
+    pattern:  /clinician-base/update-clinician/{id}
+    defaults: { _controller: CodopenexClinicianBaseBundle:Clinician:update }
+    requirements:
+        _method:  POST
+
+CodopenexClinicianBaseBundle_medical_facilities:
+    pattern:  /clinician-base/medical-facilities
+    defaults: { _controller: CodopenexClinicianBaseBundle:MedicalFacility:medical_facilities }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_medical_facility_new:
+    pattern:  /clinician-base/new-medical-facility
+    defaults: { _controller: CodopenexClinicianBaseBundle:MedicalFacility:new }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_medical_facility_create:
+    pattern:  /clinician-base/create-medical-facility
+    defaults: { _controller: CodopenexClinicianBaseBundle:MedicalFacility:create }
+    requirements:
+        _method:  POST
+
+CodopenexClinicianBaseBundle_specialties:
+    pattern:  /clinician-base/specialties
+    defaults: { _controller: CodopenexClinicianBaseBundle:Specialty:specialties }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_specialty_new:
+    pattern:  /clinician-base/new-specialty
+    defaults: { _controller: CodopenexClinicianBaseBundle:Specialty:new }
+    requirements:
+        _method:  GET
+
+CodopenexClinicianBaseBundle_specialty_create:
+    pattern:  /clinician-base/create-specialty
+    defaults: { _controller: CodopenexClinicianBaseBundle:Specialty:create }
     requirements:
         _method:  POST
