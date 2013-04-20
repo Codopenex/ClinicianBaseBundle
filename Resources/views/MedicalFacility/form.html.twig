@@ -1,0 +1,18 @@
+{# src/Codopenex/ClinicianBaseBundle/Resources/views/MedicalFacility/form.html.twig #}
+{% extends 'XperedonBlogBundle::layout.html.twig' %}
+
+{% block title %}New Medical Facility{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/codopenexclinicianbase/css/clinician.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<form action="{{ path('CodopenexClinicianBaseBundle_medical_facility_create' ) }}" method="post" {{ form_enctype(form) }} class="clinician">
+    {{ form_widget(form) }}
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+{% endblock %}

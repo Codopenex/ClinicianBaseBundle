@@ -1,0 +1,41 @@
+{# src/Codopenex/ClinicianBaseBundle/Resouces/views/Clinician/search.html.twig #}
+{% extends 'XperedonBlogBundle::layout.html.twig' %}
+
+{% block title %}Search Clinicians{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+
+    $('#clinicians tr').click(function() {
+        var href = $(this).find("a").attr("href");
+        if(href) {
+            window.location = href;
+        }
+    });
+
+});
+</script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/codopenexclinicianbase/css/clinician.css') }}" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ asset('vendor/bundles/WhiteOctober/PagerfantaBundle/Resources/public/css/pagerfantaDefault.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<h1>Search Clinicians</h1><br />
+<form id="search_clinicians_form" name="search_clinicians_form" action="" method="POST">
+    {{ form_widget(form) }}
+    <p>
+        <input type="submit" value="Submit">
+    </p>
+</form>
+<p>&nbsp;</p>
+<div id="results">
+{% for clinician_result in clinician_results %}
+{{ clinician_result.name }}<br />
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{# src/Codopenex/ClinicianBaseBundle/Resouces/views/Clinician/show.html.twig #}
+{% extends 'XperedonBlogBundle::layout.html.twig' %}
+
+{% block title %}Edit Clinicians{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/codopenexclinicianbase/css/clinician.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+<form action="{{ path('CodopenexClinicianBaseBundle_clinician_update', { id: clinician.id } ) }}" method="post" {{ form_enctype(form) }} class="clinician-form">
+	{{ form_row(form.name, { 'label': 'Name' }) }}
+	{{ form_row(form.phone, { 'label': 'Phone' }) }}
+	{{ form_row(form.email, { 'label': 'Email' }) }}
+	{{ form_row(form.medical_facilities, { 'label': 'Medical Facilities' }) }}
+	{{ form_row(form.specialties, { 'label': 'Specialties' }) }}
+    {{ form_rest(form) }}
+    <p>
+        <label></label><input type="submit" value="Submit" class="clinician-submit">
+    </p>
+</form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{# src/Codopenex/ClinicianBaseBundle/Resources/views/Specialty/form.html.twig #}
+{% extends 'XperedonBlogBundle::layout.html.twig' %}
+
+{% block title %}New Specialty{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/codopenexclinicianbase/css/clinician.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<form action="{{ path('CodopenexClinicianBaseBundle_specialty_create' ) }}" method="post" {{ form_enctype(form) }} class="clinician-form">
+	{{ form_row(form.name, { 'label': 'Name' }) }}
+	{{ form_row(form.description, { 'label': 'Description' }) }}
+    {{ form_rest(form) }}
+    <p>
+        <label></label><input type="submit" value="Submit" class="clinician-submit">
+    </p>
+</form>
+{% endblock %}
